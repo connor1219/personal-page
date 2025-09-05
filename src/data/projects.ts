@@ -24,7 +24,7 @@ export const PROJECTS: Record<Category, ProjectItem[]> = {
       id: "fish",
       imageSrc: "/icon/coming-soon.png",
       title: "Coming Soon",
-      body: "Now you're probably thinking to yourself, 'Surely he didn't make a website just to showcase one project right?'. Well you should click on the fish.",
+      body: "I don't really have anything else tech related to showcase, so just go click on the fish.",
     },
   ],
   [Category.FISHING]: [

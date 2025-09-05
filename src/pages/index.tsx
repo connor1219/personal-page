@@ -1,22 +1,24 @@
 import { Box, IconButton, Link, Typography } from "@mui/material";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import Image from "next/image";
-import { useState } from "react";
-import ProjectCarousel from "@/components/ProjectCarousel";
+import { useState, useRef } from "react";
+import ProjectCarousel, { ProjectCarouselRef } from "@/components/ProjectCarousel";
 import { PROJECTS, Category } from "@/data/projects";
 
 const Home = () => {
   const [category, setCategory] = useState<Category>(Category.GENERAL);
   const [resetCounter, setResetCounter] = useState(0);
+  const carouselRef = useRef<ProjectCarouselRef>(null);
   const items = PROJECTS[category];
 
   const handleFishClick = () => {
-    if (category === Category.GENERAL) {
-      setCategory(Category.FISHING);
-    } else {
-      setCategory(Category.GENERAL);
-    }
-    setResetCounter(prev => prev + 1);
+    const newCategory = category === Category.GENERAL ? Category.FISHING : Category.GENERAL;
+    
+    // Use the carousel's transition method to fade out first, then change category
+    carouselRef.current?.triggerCategoryTransition(() => {
+      setCategory(newCategory);
+      setResetCounter(prev => prev + 1);
+    });
   };
 
   const getTitle = () => {
@@ -114,7 +116,7 @@ const Home = () => {
                         }}
                     >
                         <Box sx={{ width: "100%" }}>
-                             <ProjectCarousel items={items} resetTrigger={resetCounter} />
+                             <ProjectCarousel ref={carouselRef} items={items} resetTrigger={resetCounter} />
                         </Box>
                     </Box>
                                 </Box>
