@@ -6,9 +6,10 @@ export type ProjectInfoCardProps = {
   title: string;
   body: string;
   link?: string;
+  priority?: boolean;
 };
 
-const ProjectInfoCard = ({ imageSrc, title, body, link }: ProjectInfoCardProps) => {
+const ProjectInfoCard = ({ imageSrc, title, body, link, priority = false }: ProjectInfoCardProps) => {
     return (
         <Box
             sx={{
@@ -31,7 +32,7 @@ const ProjectInfoCard = ({ imageSrc, title, body, link }: ProjectInfoCardProps) 
                     alt={title}
                     fill
                     style={{ objectFit: "cover" }}
-                    priority={false}
+                    priority={priority}
                 />
             </Box>
             <Box

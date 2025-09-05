@@ -17,14 +17,14 @@ const ProjectCarousel = ({ items, resetTrigger }: ProjectCarouselProps) => {
     if (newIndex === index || isTransitioning) return;
     
     setIsTransitioning(true);
-    // Start fade out, then change content after a brief delay
+    // Start fade out, then change content immediately (no decoding delay)
     setTimeout(() => {
       setIndex(newIndex);
-      // Fade back in after content change
+      // Fade back in immediately since images are preloaded
       setTimeout(() => {
         setIsTransitioning(false);
-      }, 50); // Brief delay to ensure content has updated
-    }, 150); // Fade out duration
+      }, 20); // Minimal delay to ensure DOM update
+    }, 120); // Reduced fade out duration
   }, [index, isTransitioning]);
 
   const handlePrev = useCallback(() => {
@@ -42,7 +42,6 @@ const ProjectCarousel = ({ items, resetTrigger }: ProjectCarouselProps) => {
   }, [resetTrigger]);
 
   if (count === 0) return null;
-  const current = items[index];
 
   return (
     <Box role="region" aria-label="Projects">
@@ -60,14 +59,22 @@ const ProjectCarousel = ({ items, resetTrigger }: ProjectCarouselProps) => {
             borderRadius: 2
           }}
         >
-          <Box
-            sx={{
-              opacity: isTransitioning ? 0.3 : 1,
-              transition: "opacity 0.15s ease-in-out"
-            }}
-          >
-            <ProjectInfoCard {...current} />
-          </Box>
+          {items.map((item, i) => (
+            <Box
+              key={`slide-${i}`}
+              sx={{
+                opacity: isTransitioning ? 0.3 : 1,
+                transition: "opacity 0.12s ease-in-out",
+                visibility: i === index ? "visible" : "hidden",
+                position: i === index ? "relative" : "absolute",
+                top: i === index ? 0 : 0,
+                left: i === index ? 0 : -9999,
+                width: "100%",
+              }}
+            >
+              <ProjectInfoCard {...item} priority={true} />
+            </Box>
+          ))}
         </Paper>
 
         <IconButton aria-label="Next" onClick={handleNext} disabled={count <= 1}>
@@ -82,14 +89,13 @@ const ProjectCarousel = ({ items, resetTrigger }: ProjectCarouselProps) => {
             onClick={() => handleTransition(i)}
             aria-label={`Go to slide ${i + 1}`}
             aria-current={i === index}
-            disabled={isTransitioning}
             style={{
               width: 10,
               height: 10,
               borderRadius: "50%",
               border: "none",
               background: i === index ? "rgba(0,0,0,0.54)" : "rgba(0,0,0,0.12)",
-              cursor: isTransitioning ? "default" : "pointer",
+              cursor: "pointer",
             }}
           />
         ))}
