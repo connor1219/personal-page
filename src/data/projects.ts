@@ -21,6 +21,13 @@ export const PROJECTS: Record<Category, ProjectItem[]> = {
       link: "https://app.devply.ca",
     },
     {
+      id: "gsm-webhook-messenger",
+      imageSrc: "/icon/gsmWebhook.png",
+      title: "GSM Webhook Messenger",
+      body: "A multi-threaded system interfacing with a 4G/LTE modem to automatically retrieve and forward SMS messages to Discord.",
+      link: "https://github.com/connor1219/GSM-Webhook-Messenger",
+    },
+    {
       id: "fish",
       imageSrc: "/icon/coming-soon.png",
       title: "Coming Soon",
