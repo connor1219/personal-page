@@ -18,7 +18,7 @@ export const PROJECTS: Record<Category, ProjectItem[]> = {
       imageSrc: "/icon/devply2.png",
       title: "Devply",
       body: "A two-sided municipal development application tracking system for City Planners and Developers",
-      link: "https://devply.com",
+      link: "https://app.devply.ca",
     },
     {
       id: "fish",
