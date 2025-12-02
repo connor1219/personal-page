@@ -40,9 +40,13 @@ const ProjectInfoCard = ({ imageSrc, title, body, link, priority = false }: Proj
                     width: "100%",
                     borderTop: "1px solid",
                     borderColor: "divider",
-                    p: 2,
+                    p: { xs: 1.5, sm: 2, md: 2.5 },
+                    minHeight: { xs: "120px", sm: "140px" },
                     backgroundColor: "background.paper",
                     boxShadow: (theme) => theme.shadows[1],
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-start",
                 }}
             >
                 {link ? (
@@ -55,16 +59,40 @@ const ProjectInfoCard = ({ imageSrc, title, body, link, priority = false }: Proj
                             "&:hover": { textDecoration: "underline" } 
                         }}
                     >
-                        <Typography variant="h6" sx={{ mb: 1, fontWeight: 700 }}>
+                        <Typography 
+                            variant="h6" 
+                            sx={{ 
+                                mb: 1, 
+                                fontWeight: 700,
+                                fontSize: { xs: "1.1rem", sm: "1.25rem", md: "1.35rem" },
+                                lineHeight: 1.2
+                            }}
+                        >
                             {title}
                         </Typography>
                     </Link>
                 ) : (
-                    <Typography variant="h6" sx={{ mb: 1, fontWeight: 700 }}>
+                    <Typography 
+                        variant="h6" 
+                        sx={{ 
+                            mb: 1, 
+                            fontWeight: 700,
+                            fontSize: { xs: "1.1rem", sm: "1.25rem", md: "1.35rem" },
+                            lineHeight: 1.2
+                        }}
+                    >
                         {title}
                     </Typography>
                 )}
-                <Typography variant="body1" sx={{ color: "text.secondary" }}>
+                <Typography 
+                    variant="body1" 
+                    sx={{ 
+                        color: "text.secondary",
+                        fontSize: { xs: "0.875rem", sm: "1rem", md: "1rem" },
+                        lineHeight: { xs: 1.4, sm: 1.5, md: 1.6 },
+                        flex: 1
+                    }}
+                >
                     {body}
                 </Typography>
             </Box>
