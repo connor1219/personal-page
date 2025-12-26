@@ -14,6 +14,13 @@ export enum Category {
 export const PROJECTS: Record<Category, ProjectItem[]> = {
   [Category.GENERAL]: [
     {
+        id: "the-cannon-alerts",
+        imageSrc: "/icon/TheCannonAlerts.png",
+        title: "TheCannonAlerts",
+        body: "A web application that allows users to subsribe to email or discordnotifications for new listings posted on TheCannon.ca",
+        link: "https://thecannonalerts.ca",
+    },
+    {
       id: "devply",
       imageSrc: "/icon/devply2.png",
       title: "Devply",
