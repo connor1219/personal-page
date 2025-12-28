@@ -4,6 +4,7 @@ import React from "react";
 import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
 import { M_PLUS_Rounded_1c } from "next/font/google";
 import { PROJECTS, ProjectItem } from "@/data/projects";
+import "@/styles/globals.css";
 
 const mPlusRounded = M_PLUS_Rounded_1c({
   subsets: ["latin"],
