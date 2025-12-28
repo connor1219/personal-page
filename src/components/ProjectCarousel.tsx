@@ -300,7 +300,7 @@ const ProjectCarousel = forwardRef<ProjectCarouselRef, ProjectCarouselProps>(
               <button
                 aria-label="Next"
                 onClick={() => mobileApi?.scrollNext()}
-                disabled={current === count}
+                disabled={current >= items.length}
                 className={cn(
                   "p-2 rounded-full border-none cursor-pointer transition-opacity",
                   "hover:opacity-70 disabled:opacity-30 disabled:cursor-not-allowed",
