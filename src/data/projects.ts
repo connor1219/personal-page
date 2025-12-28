@@ -17,7 +17,7 @@ export const PROJECTS: Record<Category, ProjectItem[]> = {
         id: "the-cannon-alerts",
         imageSrc: "/icon/TheCannonAlerts.png",
         title: "TheCannonAlerts",
-        body: "A web application that allows users to subsribe to email or discordnotifications for new listings posted on TheCannon.ca",
+        body: "A web application that allows users to subscribe to email or discord notifications for new listings posted on TheCannon.ca",
         link: "https://thecannonalerts.ca",
     },
     {
