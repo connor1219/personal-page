@@ -24,6 +24,12 @@ const theme = createTheme({
 });
 
 export default function MyApp({ Component, pageProps }: AppProps) {
+  const baseUrl = "https://connormorgan.ca";
+  // Static screenshot for LinkedIn and social media
+  const ogImageUrl = `${baseUrl}/icon/webPreview.png`;
+  // Favicon for Google search results
+  const faviconUrl = `${baseUrl}/favicon.ico`;
+
   React.useEffect(() => {
     if (typeof window === "undefined") return;
 
@@ -57,6 +63,44 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <CssBaseline />
       <Head>
         <title>Connor Morgan</title>
+        <meta name="description" content="Connor Morgan - Software Developer" />
+        
+        {/* Favicon for Google search results */}
+        <link rel="icon" href={faviconUrl} />
+        <link rel="shortcut icon" href={faviconUrl} />
+        <link rel="apple-touch-icon" href={faviconUrl} />
+        
+        {/* Open Graph / Facebook / LinkedIn - Static screenshot */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={baseUrl} />
+        <meta property="og:title" content="Connor Morgan" />
+        <meta property="og:description" content="Software Developer" />
+        <meta property="og:image" content={ogImageUrl} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:type" content="image/png" />
+        
+        {/* Twitter - Static screenshot */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content={baseUrl} />
+        <meta name="twitter:title" content="Connor Morgan" />
+        <meta name="twitter:description" content="Software Developer" />
+        <meta name="twitter:image" content={ogImageUrl} />
+        
+        {/* Google Structured Data - Use favicon */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Connor Morgan",
+              "description": "Software Developer",
+              "url": baseUrl,
+              "image": faviconUrl,
+            }),
+          }}
+        />
       </Head>
       <main className={mPlusRounded.className}>
         <Component {...pageProps} />
