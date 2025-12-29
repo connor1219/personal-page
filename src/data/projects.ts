@@ -17,14 +17,14 @@ export const PROJECTS: Record<Category, ProjectItem[]> = {
         id: "the-cannon-alerts",
         imageSrc: "/icon/TheCannonAlerts.png",
         title: "TheCannonAlerts",
-        body: "A web application that allows users to subscribe to email or discord notifications for new listings posted on TheCannon.ca",
+        body: "A web application that allows users to subscribe to email or discord notifications for new listings posted on TheCannon.ca.",
         link: "https://thecannonalerts.ca",
     },
     {
       id: "devply",
       imageSrc: "/icon/devply2.png",
       title: "Devply",
-      body: "A two-sided municipal development application tracking system for City Planners and Developers",
+      body: "A two-sided municipal development application tracking system for City Planners and Developers.",
       link: "https://app.devply.ca",
     },
     {
