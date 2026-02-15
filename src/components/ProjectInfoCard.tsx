@@ -7,9 +7,10 @@ export type ProjectInfoCardProps = {
   body: string;
   link?: string;
   priority?: boolean;
+  blurDataURL?: string;
 };
 
-const ProjectInfoCard = ({ imageSrc, title, body, link, priority = false }: ProjectInfoCardProps) => {
+const ProjectInfoCard = ({ imageSrc, title, body, link, priority = false, blurDataURL }: ProjectInfoCardProps) => {
     return (
         <Box
             sx={{
@@ -33,6 +34,7 @@ const ProjectInfoCard = ({ imageSrc, title, body, link, priority = false }: Proj
                     fill
                     style={{ objectFit: "cover" }}
                     priority={priority}
+                    {...(blurDataURL ? { placeholder: "blur", blurDataURL } : {})}
                 />
             </Box>
             <Box

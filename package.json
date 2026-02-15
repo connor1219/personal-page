@@ -5,6 +5,8 @@
   "homepage": "https://connor1219.github.io/",
   "scripts": {
     "dev": "next dev",
+    "generate-blur": "node scripts/generate-blur.mjs",
+    "prebuild": "node scripts/generate-blur.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

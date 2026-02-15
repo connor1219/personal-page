@@ -1,24 +1,19 @@
 import { Box, IconButton, Link, Typography } from "@mui/material";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import Image from "next/image";
-import { useState, useRef } from "react";
-import ProjectCarousel, { ProjectCarouselRef } from "@/components/ProjectCarousel";
+import { useState } from "react";
+import ProjectCarousel from "@/components/ProjectCarousel";
 import { PROJECTS, Category } from "@/data/projects";
+import blurData from "@/data/blurData";
 
 const Home = () => {
   const [category, setCategory] = useState<Category>(Category.GENERAL);
   const [resetCounter, setResetCounter] = useState(0);
-  const carouselRef = useRef<ProjectCarouselRef>(null);
-  const items = PROJECTS[category];
 
   const handleFishClick = () => {
     const newCategory = category === Category.GENERAL ? Category.FISHING : Category.GENERAL;
-    
-    // Use the carousel's transition method to fade out first, then change category
-    carouselRef.current?.triggerCategoryTransition(() => {
-      setCategory(newCategory);
-      setResetCounter(prev => prev + 1);
-    });
+    setCategory(newCategory);
+    setResetCounter(prev => prev + 1);
   };
 
   const getTitle = () => {
@@ -115,8 +110,28 @@ const Home = () => {
                             flexDirection: "column",
                         }}
                     >
-                        <Box sx={{ width: "100%" }}>
-                             <ProjectCarousel ref={carouselRef} items={items} resetTrigger={resetCounter} />
+                        <Box sx={{ width: "100%", position: "relative" }}>
+                            {Object.values(Category).map((cat) => (
+                                <div
+                                    key={cat}
+                                    style={{
+                                        position: cat === category ? "relative" : "absolute",
+                                        top: 0,
+                                        left: 0,
+                                        width: "100%",
+                                        visibility: cat === category ? "visible" : "hidden",
+                                        pointerEvents: cat === category ? "auto" : "none",
+                                    }}
+                                >
+                                    <ProjectCarousel
+                                        items={PROJECTS[cat].map(item => ({
+                                            ...item,
+                                            blurDataURL: blurData[item.imageSrc],
+                                        }))}
+                                        resetTrigger={cat === category ? resetCounter : undefined}
+                                    />
+                                </div>
+                            ))}
                         </Box>
                     </Box>
                                 </Box>
@@ -125,12 +140,12 @@ const Home = () => {
         </Box>
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
             <IconButton onClick={handleFishClick}>
-                <Image 
-                    src={getIconSrc()} 
-                    alt={getIconAlt()} 
-                    width={64} 
-                    height={64} 
-                    unoptimized 
+                <Image
+                    src={getIconSrc()}
+                    alt={getIconAlt()}
+                    width={64}
+                    height={64}
+                    unoptimized
                 />
             </IconButton>
         </Box>
