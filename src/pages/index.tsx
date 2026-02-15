@@ -23,19 +23,10 @@ const Home = () => {
     return "Software Developer";
   };
 
-  const getIconSrc = () => {
-    if (category === Category.FISHING) {
-      return "/icon/mac.png";
-    }
-    return "/icon/rainbow-trout.png";
-  };
-
-  const getIconAlt = () => {
-    if (category === Category.FISHING) {
-      return "Mac";
-    }
-    return "Fishing";
-  };
+  const icons = [
+    { src: "/icon/rainbow-trout.png", alt: "Fishing", showWhen: Category.GENERAL },
+    { src: "/icon/mac.png", alt: "Mac", showWhen: Category.FISHING },
+  ] as const;
 
      return (
      <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
@@ -139,14 +130,22 @@ const Home = () => {
 
         </Box>
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-            <IconButton onClick={handleFishClick}>
-                <Image
-                    src={getIconSrc()}
-                    alt={getIconAlt()}
-                    width={64}
-                    height={64}
-                    unoptimized
-                />
+            <IconButton onClick={handleFishClick} sx={{ position: "relative", width: 80, height: 80 }}>
+                {icons.map(({ src, alt, showWhen }) => (
+                    <Image
+                        key={src}
+                        src={src}
+                        alt={alt}
+                        width={64}
+                        height={64}
+                        unoptimized
+                        priority
+                        style={{
+                            position: "absolute",
+                            visibility: category === showWhen ? "visible" : "hidden",
+                        }}
+                    />
+                ))}
             </IconButton>
         </Box>
     </Box>
