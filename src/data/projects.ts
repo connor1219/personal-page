@@ -42,10 +42,10 @@ export const PROJECTS: Record<Category, ProjectItem[]> = {
     },
   ],
   [Category.FISHING]: [
-    { id: "bass", imageSrc: "/icon/bass-catch.webp", title: "Good ol' Bass Fishing", body: "Bass will try and eat just about anything and they're super strong fighters once they're hooked. It's an awesome combo." },
     { id: "lake-trout", imageSrc: "/icon/lake-trout-catch.webp", title: "Lake Trout Jigging", body: "My first ever Lake Trout, caught in over 60ft of water. We dropped our lures to the bottom, and within minutes this guy hit." },
+    { id: "walleye", imageSrc: "/icon/walleye-new.webp", title: "Walleye Through The Ice", body: "We drove kilometres across frozen Lake Winnipeg in a blizzard for this catch. Wild trip, can’t wait to go again." },
     { id: "salmon", imageSrc: "/icon/salmon-catch.webp", title: "Salmon Run", body: "After 30 hours of fishing without a single bite, I finally hooked my first King Salmon. Totally worth the grind." },
-    { id: "walleye", imageSrc: "/icon/walleye-catch.webp", title: "Walleye Through The Ice", body: "We drove kilometres across frozen Lake Winnipeg in a blizzard for this catch. Wild trip, can’t wait to go again." },
     { id: "rainbow-trout", imageSrc: "/icon/rainbow-catch5.jpeg", title: "Fall Rainbow Trout", body: "My first ever Rainbow! I had tried lure after lure without a bite but right after I tied on my tiny orange rapala I got this guy." },
+    { id: "bass", imageSrc: "/icon/bass-catch.webp", title: "Good ol' Bass Fishing", body: "Bass will try and eat just about anything and they're super strong fighters once they're hooked. It's an awesome combo." },
   ],
 };
