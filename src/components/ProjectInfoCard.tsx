@@ -1,4 +1,5 @@
 import { Box, Link, Typography } from "@mui/material";
+import OpenInNew from "@mui/icons-material/OpenInNew";
 import Image from "next/image";
 
 export type ProjectInfoCardProps = {
@@ -61,16 +62,20 @@ const ProjectInfoCard = ({ imageSrc, title, body, link, priority = false, blurDa
                             "&:hover": { textDecoration: "underline" } 
                         }}
                     >
-                        <Typography 
-                            variant="h6" 
-                            sx={{ 
-                                mb: 1, 
+                        <Typography
+                            variant="h6"
+                            sx={{
+                                mb: 1,
                                 fontWeight: 700,
                                 fontSize: { xs: "1.1rem", sm: "1.25rem", md: "1.35rem" },
-                                lineHeight: 1.2
+                                lineHeight: 1.2,
+                                display: "flex",
+                                alignItems: "center",
+                                gap: 0.5,
                             }}
                         >
                             {title}
+                            <OpenInNew sx={{ fontSize: "inherit" }} />
                         </Typography>
                     </Link>
                 ) : (

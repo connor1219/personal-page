@@ -68,6 +68,9 @@ const Home = () => {
                              <Typography variant="h6">
                                  {getTitle()}
                              </Typography>
+                            <Typography variant="h6" sx={{ mt: -2 }}>
+                            Toronto, ON
+                            </Typography>
                             <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
                                 <Link
                                     href="https://www.linkedin.com/in/connor-morgan-custom"
@@ -86,6 +89,18 @@ const Home = () => {
                                     <FaGithub size={24} />
                                 </Link>
                             </Box>
+                            {category === Category.GENERAL && (
+                                <Typography
+                                    sx={{
+                                        color: "text.secondary",
+                                        maxWidth: 420,
+                                        lineHeight: 1.6,
+                                        mt: 1,
+                                    }}
+                                >
+                                    I&apos;m a self driven full stack develper who thrives in fast moving environments where ownership matters. I&apos;m comfortable taking ambiguous problems, defining the right path forward, and owning the solution end to end with real accountability for the outcome. Whether it&apos;s architecture, infrastructure, or product decisions, I focus on building systems that are clean, scalable, and deliver measurable impact.
+                                </Typography>
+                            )}
                         </Box>
                     </Box>
 
