@@ -1,5 +1,5 @@
 import { Box, IconButton, Link, Typography } from "@mui/material";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import Image from "next/image";
 import { useState } from "react";
 import ProjectCarousel from "@/components/ProjectCarousel";
@@ -87,6 +87,12 @@ const Home = () => {
                                     aria-label="GitHub"
                                 >
                                     <FaGithub size={24} />
+                                </Link>
+                                <Link
+                                    href="mailto:connormorgan@live.ca?subject=Hey%20Connor&body=Hey%20Connor%2C%0A%0AAwesome%20fish%20pics%20man"
+                                    aria-label="Email"
+                                >
+                                    <FaEnvelope size={24} />
                                 </Link>
                             </Box>
                             {category === Category.GENERAL && (
