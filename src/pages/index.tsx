@@ -104,7 +104,7 @@ const Home = () => {
                                         mt: 1,
                                     }}
                                 >
-                                    I&apos;m a self driven full stack developer who thrives in fast moving environments where ownership matters. I&apos;m comfortable taking ambiguous problems, defining the right path forward, and owning the solution end to end with real accountability for the outcome. Whether it&apos;s architecture, infrastructure, or product decisions, I focus on building systems that are clean, scalable, and deliver measurable impact.
+                                    I&apos;m the person you hand a messy problem to and trust that it&apos;ll ship. I&apos;ll define the approach, build it, deploy it, and keep it running.
                                 </Typography>
                             )}
                         </Box>
