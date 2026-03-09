@@ -9,9 +9,11 @@ export type ProjectInfoCardProps = {
   link?: string;
   priority?: boolean;
   blurDataURL?: string;
+  techStack?: string[];
+  lures?: string[];
 };
 
-const ProjectInfoCard = ({ imageSrc, title, body, link, priority = false, blurDataURL }: ProjectInfoCardProps) => {
+const ProjectInfoCard = ({ imageSrc, title, body, link, priority = false, blurDataURL, techStack, lures }: ProjectInfoCardProps) => {
     return (
         <Box
             sx={{
@@ -46,51 +48,100 @@ const ProjectInfoCard = ({ imageSrc, title, body, link, priority = false, blurDa
                     p: { xs: 1.5, sm: 2, md: 2.5 },
                     minHeight: { xs: "120px", sm: "140px" },
                     backgroundColor: "background.paper",
-                    boxShadow: (theme) => theme.shadows[1],
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "flex-start",
                 }}
             >
-                {link ? (
-                    <Link 
-                        href={link} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        sx={{ 
-                            textDecoration: "none", 
-                            "&:hover": { textDecoration: "underline" } 
-                        }}
-                    >
-                        <Typography
-                            variant="h6"
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        gap: 0.75,
+                        mb: 1,
+                    }}
+                >
+                    <Box sx={{ flexShrink: 0 }}>
+                        {link ? (
+                            <Link 
+                                href={link} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                sx={{ 
+                                    textDecoration: "none", 
+                                    "&:hover": { textDecoration: "underline" } 
+                                }}
+                            >
+                                <Typography
+                                    variant="h6"
+                                    sx={{
+                                        fontWeight: 700,
+                                        fontSize: { xs: "1.1rem", sm: "1.25rem", md: "1.35rem" },
+                                        lineHeight: 1.2,
+                                        display: "flex",
+                                        alignItems: "center",
+                                        gap: 0.5,
+                                    }}
+                                >
+                                    {title}
+                                    <OpenInNew sx={{ fontSize: "inherit" }} />
+                                </Typography>
+                            </Link>
+                        ) : (
+                            <Typography 
+                                variant="h6" 
+                                sx={{ 
+                                    fontWeight: 700,
+                                    fontSize: { xs: "1.1rem", sm: "1.25rem", md: "1.35rem" },
+                                    lineHeight: 1.2
+                                }}
+                            >
+                                {title}
+                            </Typography>
+                        )}
+                    </Box>
+                    {(techStack?.length || lures?.length) && (
+                        <Box
                             sx={{
-                                mb: 1,
-                                fontWeight: 700,
-                                fontSize: { xs: "1.1rem", sm: "1.25rem", md: "1.35rem" },
-                                lineHeight: 1.2,
                                 display: "flex",
-                                alignItems: "center",
-                                gap: 0.5,
+                                flexWrap: "wrap",
+                                gap: 0.75,
                             }}
                         >
-                            {title}
-                            <OpenInNew sx={{ fontSize: "inherit" }} />
-                        </Typography>
-                    </Link>
-                ) : (
-                    <Typography 
-                        variant="h6" 
-                        sx={{ 
-                            mb: 1, 
-                            fontWeight: 700,
-                            fontSize: { xs: "1.1rem", sm: "1.25rem", md: "1.35rem" },
-                            lineHeight: 1.2
-                        }}
-                    >
-                        {title}
-                    </Typography>
-                )}
+                            {techStack?.map((item) => (
+                                <Box
+                                    key={item}
+                                    sx={{
+                                        px: 0.9,
+                                        py: 0.35,
+                                        borderRadius: 999,
+                                        backgroundColor: "action.selected",
+                                        fontSize: "0.75rem",
+                                        fontWeight: 500,
+                                    }}
+                                >
+                                    {item}
+                                </Box>
+                            ))}
+                            {lures?.map((lure) => (
+                                <Box
+                                    key={lure}
+                                    sx={{
+                                        px: 0.9,
+                                        py: 0.35,
+                                        borderRadius: 999,
+                                        backgroundColor: "action.selected",
+                                        fontSize: "0.75rem",
+                                        fontWeight: 500,
+                                    }}
+                                >
+                                    {lure}
+                                </Box>
+                            ))}
+                        </Box>
+                    )}
+                </Box>
                 <Typography 
                     variant="body1" 
                     sx={{ 

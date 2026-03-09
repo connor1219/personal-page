@@ -1,4 +1,8 @@
 import { Box, IconButton, Link, Typography } from "@mui/material";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import CodeIcon from "@mui/icons-material/Code";
+import DevicesIcon from "@mui/icons-material/Devices";
+import SchoolIcon from "@mui/icons-material/School";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import Image from "next/image";
 import { useState } from "react";
@@ -71,7 +75,7 @@ const Home = () => {
                             <Typography variant="h6" sx={{ mt: -2 }}>
                             Toronto, ON
                             </Typography>
-                            <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
+                            <Box sx={{ display: "flex", flexDirection: "row", gap: 2, color: "primary.main" }}>
                                 <Link
                                     href="https://www.linkedin.com/in/connor-morgan-custom"
                                     target="_blank"
@@ -96,16 +100,124 @@ const Home = () => {
                                 </Link>
                             </Box>
                             {category === Category.GENERAL && (
-                                <Typography
-                                    sx={{
-                                        color: "text.secondary",
-                                        maxWidth: 420,
-                                        lineHeight: 1.6,
-                                        mt: 1,
-                                    }}
-                                >
-                                    I&apos;m the person you hand a messy problem to and trust that it&apos;ll ship. I&apos;ll define the approach, build it, deploy it, and keep it running.
-                                </Typography>
+                                <>
+                                    <Typography
+                                        sx={{
+                                            color: "text.secondary",
+                                            maxWidth: 420,
+                                            lineHeight: 1.6,
+                                            mt: 1,
+                                        }}
+                                    >
+                                        I&apos;m the person you hand a messy problem to and trust that it&apos;ll ship. I&apos;ll define the approach, build it, deploy it, and keep it running.
+                                    </Typography>
+                                    <Box sx={{ mt: 3, width: "100%" }}>
+                                        <Typography
+                                            variant="subtitle2"
+                                            sx={{
+                                                fontWeight: 700,
+                                                letterSpacing: 0.08,
+                                                textTransform: "uppercase",
+                                                textAlign: "center",
+                                                mb: 1.5,
+                                            }}
+                                        >
+                                            About Me
+                                        </Typography>
+                                        <Box
+                                            sx={{
+                                                display: "grid",
+                                                gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" },
+                                                gap: 1.5,
+                                            }}
+                                        >
+                                            <Box
+                                                sx={{
+                                                    display: "flex",
+                                                    alignItems: "flex-start",
+                                                    gap: 1.5,
+                                                    p: 1.5,
+                                                    borderRadius: 2,
+                                                    border: "1px solid",
+                                                    borderColor: "divider",
+                                                    backgroundColor: "background.paper",
+                                                    boxShadow: (theme) => theme.shadows[1],
+                                                }}
+                                            >
+                                                <Box sx={{ mt: 0.25 }}>
+                                                    <BarChartIcon sx={{ color: "primary.main" }} />
+                                                </Box>
+                                                <Typography variant="body2" sx={{ textAlign: "left" }}>
+                                                    Generated{" "}
+                                                    <Box component="span" sx={{ fontWeight: 700 }}>
+                                                         $450,000+ 
+                                                    </Box>{" "}
+                                                    in revenue via my ecommerce business
+                                                </Typography>
+                                            </Box>
+                                            <Box
+                                                sx={{
+                                                    display: "flex",
+                                                    alignItems: "flex-start",
+                                                    gap: 1.5,
+                                                    p: 1.5,
+                                                    borderRadius: 2,
+                                                    border: "1px solid",
+                                                    borderColor: "divider",
+                                                    backgroundColor: "background.paper",
+                                                    boxShadow: (theme) => theme.shadows[1],
+                                                }}
+                                            >
+                                                <Box sx={{ mt: 0.25 }}>
+                                                    <CodeIcon sx={{ color: "primary.main" }} />
+                                                </Box>
+                                                <Typography variant="body2" sx={{ textAlign: "left" }}>
+                                                    Currently a full stack developer at Value Connect in Guelph, ON
+                                                </Typography>
+                                            </Box>
+                                            <Box
+                                                sx={{
+                                                    display: "flex",
+                                                    alignItems: "flex-start",
+                                                    gap: 1.5,
+                                                    p: 1.5,
+                                                    borderRadius: 2,
+                                                    border: "1px solid",
+                                                    borderColor: "divider",
+                                                    backgroundColor: "background.paper",
+                                                    boxShadow: (theme) => theme.shadows[1],
+                                                }}
+                                            >
+                                                <Box sx={{ mt: 0.25 }}>
+                                                    <DevicesIcon sx={{ color: "primary.main" }} />
+                                                </Box>
+                                                <Typography variant="body2" sx={{ textAlign: "left" }}>
+                                                    Currently building out Devply
+                                                </Typography>
+                                            </Box>
+                                            <Box
+                                                sx={{
+                                                    display: "flex",
+                                                    alignItems: "flex-start",
+                                                    gap: 1.5,
+                                                    p: 1.5,
+                                                    borderRadius: 2,
+                                                    border: "1px solid",
+                                                    borderColor: "divider",
+                                                    backgroundColor: "background.paper",
+                                                    boxShadow: (theme) => theme.shadows[1],
+                                                }}
+                                            >
+                                                <Box sx={{ mt: 0.25 }}>
+                                                    <SchoolIcon sx={{ color: "primary.main" }} />
+                                                </Box>
+                                                <Typography variant="body2" sx={{ textAlign: "left" }}>
+                                                    University of Guelph Computer Science
+                                                </Typography>
+                                            </Box>
+                                        </Box>
+                                    </Box>
+                                </>
                             )}
                         </Box>
                     </Box>
