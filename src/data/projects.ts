@@ -16,21 +16,6 @@ export enum Category {
 export const PROJECTS: Record<Category, ProjectItem[]> = {
   [Category.GENERAL]: [
     {
-        id: "the-cannon-alerts",
-        imageSrc: "/icon/TheCannonAlerts.png",
-        title: "TheCannonAlerts",
-        body: "A real time system that monitors rental listings and alerts subscribers instantly or at their desired interval. Built to solve the problem of missing competitive student rentals.",
-        link: "https://thecannonalerts.ca",
-        techStack: [
-          "Python",
-          "TypeScript",
-          "React",
-          "Next.js",
-          "Firebase (Firestore, Functions, Hosting)",
-          "Mailgun",
-        ],
-    },
-    {
       id: "devply",
       imageSrc: "/icon/devply.png",
       title: "Devply",
@@ -45,10 +30,25 @@ export const PROJECTS: Record<Category, ProjectItem[]> = {
       ],
     },
     {
+      id: "the-cannon-alerts",
+      imageSrc: "/icon/TheCannonAlerts.png",
+      title: "TheCannonAlerts",
+      body: "A real time system that monitors rental listings and alerts subscribers instantly or at their desired interval. Built to solve the problem of missing competitive student rentals.",
+      link: "https://thecannonalerts.ca",
+      techStack: [
+        "Python",
+        "TypeScript",
+        "React",
+        "Next.js",
+        "Firebase (Firestore, Functions, Hosting)",
+        "Mailgun",
+      ],
+    },
+    {
       id: "gsm-webhook-messenger",
       imageSrc: "/icon/gsmWebhook.png",
       title: "GSM Webhook Messenger",
-      body: "A system that retrieves SMS messages from a 4G/LTE modem and forwards them to Discord in real time. Built to automate account monitoring and notifications for my ecommerce business.",
+      body: "A system that retrieves SMS messages from a 4G/LTE modem and forwards them to Discord in real time. Built to automate account monitoring and notifications for my reselling business.",
       link: "https://github.com/connor1219/GSM-Webhook-Messenger",
       techStack: ["Python"],
     },

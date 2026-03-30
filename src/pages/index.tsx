@@ -53,7 +53,7 @@ const Home = () => {
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
-                            px: 3,
+                            px: { xs: 3, md: 1.5 },
                         }}
                     >
                         <Box
@@ -63,7 +63,7 @@ const Home = () => {
                                 alignItems: "center",
                                 textAlign: "center",
                                 gap: 2,
-                                maxWidth: 520,
+                                maxWidth: 620,
                                 width: "100%",
                                 marginTop: { xs: 10, md: 0 },
                             }}
@@ -148,11 +148,7 @@ const Home = () => {
                                                     <BarChartIcon sx={{ color: "primary.main" }} />
                                                 </Box>
                                                 <Typography variant="body2" sx={{ textAlign: "left" }}>
-                                                    Generated{" "}
-                                                    <Box component="span" sx={{ fontWeight: 700 }}>
-                                                         $450,000+ 
-                                                    </Box>{" "}
-                                                    in revenue via my ecommerce business
+                                                  Built and operate a software driven resale business, generating <Box component="span" sx={{ fontWeight: 700 }}> $450,000+ </Box> in revenue by reselling high demand, limited supply goods
                                                 </Typography>
                                             </Box>
                                             <Box
@@ -172,7 +168,7 @@ const Home = () => {
                                                     <CodeIcon sx={{ color: "primary.main" }} />
                                                 </Box>
                                                 <Typography variant="body2" sx={{ textAlign: "left" }}>
-                                                    Currently a full stack developer at Value Connect in Guelph, ON
+                                                  Currently working as a Full Stack Developer at <Link href="https://www.valueconnect.ca" target="_blank" rel="noopener noreferrer">Value Connect</Link>, leading all development across the frontend, backend, and infrastructure
                                                 </Typography>
                                             </Box>
                                             <Box
@@ -192,7 +188,7 @@ const Home = () => {
                                                     <DevicesIcon sx={{ color: "primary.main" }} />
                                                 </Box>
                                                 <Typography variant="body2" sx={{ textAlign: "left" }}>
-                                                    Currently building out Devply
+                                                   My latest passion project is  <Link href="https://app.devply.ca/landing" target="_blank" rel="noopener noreferrer">Devply</Link> (you should check it out!)
                                                 </Typography>
                                             </Box>
                                             <Box

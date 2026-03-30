@@ -168,7 +168,7 @@ const ProjectCarousel = ({ items, resetTrigger }: ProjectCarouselProps) => {
       )}
 
       {/* Mobile Layout */}
-      <Box sx={{ display: { xs: "block", md: "none" }, px: "8px", mt: 2 }}>
+      <Box sx={{ display: { xs: "block", md: "none" }, mt: 2 }}>
         <Carousel
           setApi={setMobileApi}
           opts={{
