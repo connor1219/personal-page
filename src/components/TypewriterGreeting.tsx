@@ -68,7 +68,7 @@ export default function TypewriterGreeting({
         {
           text: GREETING_TEXT,
           fontSize,
-          strokeWidth: 1.25,
+          strokeWidth: 3,
           color,
           duration: VARA_GREETING_DURATION_MS,
           id: "greeting",

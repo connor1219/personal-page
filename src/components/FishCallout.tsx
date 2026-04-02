@@ -4,11 +4,9 @@ import { Box, IconButton } from "@mui/material";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { annotate } from "rough-notation";
+import { DEVPLY_ACCENT } from "@/lib/brandColors";
 import { DRAW_MS, FISH_CALLOUT_DELAY_MS } from "@/lib/pitchTiming";
 import { Category } from "@/data/projects";
-
-/** Same teal for fish circle, label, and arrow (matches rough-notation pen) */
-const FISH_ACCENT = "rgba(13, 148, 136, 0.92)";
 
 type IconConfig = {
   src: string;
@@ -33,7 +31,7 @@ export default function FishCallout({ category, onFishClick, icons }: FishCallou
       if (!fishWrapRef.current) return;
       annotation = annotate(fishWrapRef.current, {
         type: "circle",
-        color: FISH_ACCENT,
+        color: DEVPLY_ACCENT,
         strokeWidth: 2.5,
         padding: 10,
         animate: true,
@@ -84,14 +82,14 @@ export default function FishCallout({ category, onFishClick, icons }: FishCallou
         }}
         aria-hidden
       >
-        {/* Arrow graphic: Arrow by QuiverAI — https://quiver.ai — color via FISH_ACCENT */}
+        {/* Arrow graphic: Arrow by QuiverAI — https://quiver.ai */}
         <Box
           component="svg"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 201 126"
           fill="none"
           sx={{
-            color: FISH_ACCENT,
+            color: DEVPLY_ACCENT,
             flexShrink: 0,
             width: { xs: 85, sm: 105 },
             height: "auto",

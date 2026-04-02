@@ -2,20 +2,28 @@
 
 import { useEffect, useRef } from "react";
 import { annotate } from "rough-notation";
+import { DEVPLY_PRIMARY_RGB } from "@/lib/brandColors";
 import { ensureFontsReady } from "@/lib/fontReady";
 import { DRAW_MS } from "@/lib/pitchTiming";
 
 /** Default inset for circle annotations (top, right, bottom, left). */
 export const DEFAULT_CIRCLE_PADDING: [number, number, number, number] = [8, 14, 8, 14];
 
+/**
+ * Devply green for all rough-notation (highlights, underlines, circles).
+ * Keys unchanged for PitchColumn / FishingColumn.
+ */
+const HIGHLIGHT = `rgba(${DEVPLY_PRIMARY_RGB}, 0.44)`;
+const STROKE = `rgba(${DEVPLY_PRIMARY_RGB}, 0.88)`;
+
 export const penColors = {
-  highlightYellow: "rgba(253, 230, 138, 0.48)",
-  highlightMint: "rgba(167, 243, 208, 0.55)",
-  highlightBlue: "rgba(147, 197, 253, 0.5)",
-  underlinePink: "rgba(251, 182, 209, 0.85)",
-  underlineCoral: "rgba(251, 146, 60, 0.75)",
-  circleViolet: "rgba(167, 139, 250, 0.9)",
-  highlightMarker: "rgba(251, 191, 36, 0.44)",
+  highlightYellow: HIGHLIGHT,
+  highlightMint: HIGHLIGHT,
+  highlightBlue: HIGHLIGHT,
+  underlinePink: STROKE,
+  underlineCoral: STROKE,
+  circleViolet: STROKE,
+  highlightMarker: HIGHLIGHT,
 };
 
 type PenBaseProps = {

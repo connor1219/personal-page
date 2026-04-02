@@ -4,6 +4,7 @@ import React from "react";
 import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
 import { M_PLUS_Rounded_1c } from "next/font/google";
 import { PROJECTS, ProjectItem } from "@/data/projects";
+import { PRIMARY_BLUE } from "@/lib/brandColors";
 import { ensureFontsReady } from "@/lib/fontReady";
 import "@/styles/globals.css";
 
@@ -18,6 +19,9 @@ const theme = createTheme({
     fontFamily: mPlusRounded.style.fontFamily,
   },
   palette: {
+    primary: {
+      main: PRIMARY_BLUE,
+    },
     background: {
       default: "#F7F7F7",
     },
