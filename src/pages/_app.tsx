@@ -4,6 +4,7 @@ import React from "react";
 import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
 import { M_PLUS_Rounded_1c } from "next/font/google";
 import { PROJECTS, ProjectItem } from "@/data/projects";
+import { ensureFontsReady } from "@/lib/fontReady";
 import "@/styles/globals.css";
 
 const mPlusRounded = M_PLUS_Rounded_1c({
@@ -29,6 +30,10 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const ogImageUrl = `${baseUrl}/icon/webPreview.png`;
   // Favicon for Google search results
   const faviconUrl = `${baseUrl}/favicon.ico`;
+
+  React.useEffect(() => {
+    void ensureFontsReady();
+  }, []);
 
   React.useEffect(() => {
     if (typeof window === "undefined") return;

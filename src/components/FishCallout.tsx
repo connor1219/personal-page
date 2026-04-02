@@ -1,17 +1,11 @@
 "use client";
 
-import { Box, IconButton, Typography } from "@mui/material";
-import { Patrick_Hand } from "next/font/google";
+import { Box, IconButton } from "@mui/material";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { annotate } from "rough-notation";
 import { DRAW_MS, FISH_CALLOUT_DELAY_MS } from "@/lib/pitchTiming";
 import { Category } from "@/data/projects";
-
-const clickMeFont = Patrick_Hand({
-  weight: ["400"],
-  subsets: ["latin"],
-});
 
 /** Same teal for fish circle, label, and arrow (matches rough-notation pen) */
 const FISH_ACCENT = "rgba(13, 148, 136, 0.92)";
@@ -60,22 +54,19 @@ export default function FishCallout({ category, onFishClick, icons }: FishCallou
 
   return (
     <Box
+      component="footer"
       sx={{
-        position: "fixed",
-        left: 0,
-        right: 0,
-        bottom: { xs: 7, sm: 9 },
-        zIndex: 10,
         display: "flex",
         flexDirection: "row",
         justifyContent: "flex-end",
         alignItems: "center",
         width: "100%",
+        flexShrink: 0,
+        overflow: "visible",
         pr: { xs: 1, sm: 2 },
-        pb: { xs: 1, sm: 0 },
+        pt: { xs: 2, sm: 3 },
+        pb: { xs: 3, sm: 2 },
         gap: { xs: 0.5, sm: 0.75 },
-        pointerEvents: "none",
-        "& .MuiIconButton-root": { pointerEvents: "auto" },
       }}
     >
       {/* Only the label + arrow wait for showHint; fish stays visible from the first paint */}
@@ -121,7 +112,7 @@ export default function FishCallout({ category, onFishClick, icons }: FishCallou
         </Box>
       </Box>
 
-      <Box ref={fishWrapRef} sx={{ position: "relative", width: 80, height: 80, flexShrink: 0 }}>
+      <Box ref={fishWrapRef} sx={{ position: "relative", width: 80, height: 80, flexShrink: 0, overflow: "visible" }}>
         <IconButton
           onClick={onFishClick}
           aria-label="Toggle project category"

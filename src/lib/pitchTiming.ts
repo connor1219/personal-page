@@ -7,7 +7,7 @@ export const step = DRAW_MS + PAUSE_BETWEEN_MS;
 /** Greeting string for Vara (`TypewriterGreeting`). */
 export const GREETING_TEXT = "Hi, I'm Connor Morgan";
 /** Vara stroke-draw duration for the full greeting (ms). */
-export const VARA_GREETING_DURATION_MS = 4000;
+export const VARA_GREETING_DURATION_MS = 2000;
 /** Brief pause after the drawing finishes before pen animations begin. */
 export const GREETING_PAD_MS = 280;
 export const GREETING_ANIMATION_TOTAL_MS =

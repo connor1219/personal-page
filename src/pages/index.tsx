@@ -28,8 +28,10 @@ const Home = () => {
         minHeight: "100dvh",
         display: "flex",
         flexDirection: "column",
-        // Safe area only; fixed fish sits in the corner and does not need layout padding
-        pb: "env(safe-area-inset-bottom, 0px)",
+        pb: {
+          xs: "calc(24px + env(safe-area-inset-bottom, 0px))",
+          md: "env(safe-area-inset-bottom, 0px)",
+        },
       }}
     >
       <Box

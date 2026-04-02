@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { annotate } from "rough-notation";
+import { ensureFontsReady } from "@/lib/fontReady";
 import { DRAW_MS } from "@/lib/pitchTiming";
 
 /** Default inset for circle annotations (top, right, bottom, left). */
@@ -35,20 +36,26 @@ export function PenHighlight({
 
   useEffect(() => {
     if (!ref.current) return;
+    let cancelled = false;
     let annotation: ReturnType<typeof annotate> | undefined;
     const timer = setTimeout(() => {
-      annotation = annotate(ref.current!, {
-        type: "highlight",
-        color,
-        multiline,
-        iterations: 1,
-        padding: [2, 4],
-        animate: true,
-        animationDuration,
-      });
-      annotation.show();
+      void (async () => {
+        await ensureFontsReady();
+        if (cancelled || !ref.current) return;
+        annotation = annotate(ref.current!, {
+          type: "highlight",
+          color,
+          multiline,
+          iterations: 1,
+          padding: [2, 4],
+          animate: true,
+          animationDuration,
+        });
+        annotation.show();
+      })();
     }, delay);
     return () => {
+      cancelled = true;
       clearTimeout(timer);
       try {
         annotation?.remove();
@@ -75,19 +82,26 @@ export function PenUnderline({
 
   useEffect(() => {
     if (!ref.current) return;
+    let cancelled = false;
     let annotation: ReturnType<typeof annotate> | undefined;
     const timer = setTimeout(() => {
-      annotation = annotate(ref.current!, {
-        type: "underline",
-        color,
-        strokeWidth: 2.5,
-        padding: 2,
-        animate: true,
-        animationDuration,
-      });
-      annotation.show();
+      void (async () => {
+        await ensureFontsReady();
+        if (cancelled || !ref.current) return;
+        annotation = annotate(ref.current!, {
+          type: "underline",
+          color,
+          strokeWidth: 2.5,
+          padding: 2,
+          animate: true,
+          animationDuration,
+          multiline: true,
+        });
+        annotation.show();
+      })();
     }, delay);
     return () => {
+      cancelled = true;
       clearTimeout(timer);
       try {
         annotation?.remove();
@@ -111,12 +125,6 @@ export function PenCircle({
   animationDuration = DRAW_MS,
   multiline = true,
   padding = DEFAULT_CIRCLE_PADDING,
-  /**
-   * `white-space: pre-wrap` on the wrapper so you can use `\n` in the string to
-   * choose line breaks. Rough-notation then draws one ellipse per line box
-   * (with `multiline: true`). Prefer this over a `<pre>` block, which is
-   * monospace and not appropriate inside body copy.
-   */
   preWrap = false,
 }: PenBaseProps & {
   multiline?: boolean;
@@ -127,20 +135,26 @@ export function PenCircle({
 
   useEffect(() => {
     if (!ref.current) return;
+    let cancelled = false;
     let annotation: ReturnType<typeof annotate> | undefined;
     const timer = setTimeout(() => {
-      annotation = annotate(ref.current!, {
-        type: "circle",
-        color,
-        multiline,
-        strokeWidth: 2,
-        padding,
-        animate: true,
-        animationDuration,
-      });
-      annotation.show();
+      void (async () => {
+        await ensureFontsReady();
+        if (cancelled || !ref.current) return;
+        annotation = annotate(ref.current!, {
+          type: "circle",
+          color,
+          multiline,
+          strokeWidth: 2,
+          padding,
+          animate: true,
+          animationDuration,
+        });
+        annotation.show();
+      })();
     }, delay);
     return () => {
+      cancelled = true;
       clearTimeout(timer);
       try {
         annotation?.remove();

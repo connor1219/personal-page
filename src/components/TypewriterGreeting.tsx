@@ -3,6 +3,7 @@
 import { Box, useTheme } from "@mui/material";
 import type { TypographyProps } from "@mui/material";
 import { useEffect, useId, useRef } from "react";
+import { ensureFontsReady } from "@/lib/fontReady";
 import {
   GREETING_TEXT,
   VARA_GREETING_DURATION_MS,
@@ -32,6 +33,8 @@ export default function TypewriterGreeting({
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
+
+    void ensureFontsReady();
 
     completedRef.current = false;
     let cancelled = false;
