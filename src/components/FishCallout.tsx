@@ -78,7 +78,7 @@ export default function FishCallout({ category, onFishClick, icons }: FishCallou
           gap: { xs: 0.4, sm: 0.5 },
           opacity: showHint ? 1 : 0,
           transform: showHint ? "translateX(0)" : "translateX(8px)",
-          transition: "opacity 0.36s ease, transform 0.36s ease",
+          transition: "opacity 0.45s ease, transform 0.45s ease",
           pointerEvents: "none",
           maxWidth: { xs: "calc(100% - 120px)", sm: "none" },
         }}
