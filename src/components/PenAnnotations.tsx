@@ -25,6 +25,35 @@ type PenBaseProps = {
   animationDuration?: number;
 };
 
+/** Safari (esp. iOS) can return stale rects if we measure before paint settles. */
+function isIOSOrIPadOS(): boolean {
+  if (typeof navigator === "undefined") return false;
+  return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
+function flushLayout(el: HTMLElement | null): void {
+  if (!el) return;
+  void el.offsetHeight;
+}
+
+function afterNextPaint(): Promise<void> {
+  return new Promise((resolve) => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => resolve());
+    });
+  });
+}
+
+/** Fonts + layout flush; on iOS, wait an extra frame so getClientRects matches paint. */
+async function readyToMeasure(el: HTMLElement | null): Promise<void> {
+  await ensureFontsReady();
+  flushLayout(el);
+  if (isIOSOrIPadOS()) {
+    await afterNextPaint();
+    flushLayout(el);
+  }
+}
+
 export function PenHighlight({
   children,
   delay = 0,
@@ -40,7 +69,7 @@ export function PenHighlight({
     let annotation: ReturnType<typeof annotate> | undefined;
     const timer = setTimeout(() => {
       void (async () => {
-        await ensureFontsReady();
+        await readyToMeasure(ref.current);
         if (cancelled || !ref.current) return;
         annotation = annotate(ref.current!, {
           type: "highlight",
@@ -86,7 +115,7 @@ export function PenUnderline({
     let annotation: ReturnType<typeof annotate> | undefined;
     const timer = setTimeout(() => {
       void (async () => {
-        await ensureFontsReady();
+        await readyToMeasure(ref.current);
         if (cancelled || !ref.current) return;
         annotation = annotate(ref.current!, {
           type: "underline",
@@ -139,7 +168,7 @@ export function PenCircle({
     let annotation: ReturnType<typeof annotate> | undefined;
     const timer = setTimeout(() => {
       void (async () => {
-        await ensureFontsReady();
+        await readyToMeasure(ref.current);
         if (cancelled || !ref.current) return;
         annotation = annotate(ref.current!, {
           type: "circle",

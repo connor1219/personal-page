@@ -91,11 +91,11 @@ export default function FishingColumn() {
           }}
         >
           This year I&apos;m hoping to land my first{" "}
-          <PenHighlight delay={dAfterGreeting(3)} color={penColors.highlightMarker} multiline={false}>
+          <PenHighlight delay={dAfterGreeting(3)} color={penColors.highlightMarker}>
             brown trout
           </PenHighlight>{" "}
           and my first{" "}
-          <PenHighlight delay={dAfterGreeting(4)} color={penColors.highlightMint} multiline={false}>
+          <PenHighlight delay={dAfterGreeting(4)} color={penColors.highlightMint}>
             Atlantic trout
           </PenHighlight>
           . If you&apos;re ever looking for a fishing buddy, give me a holler.
