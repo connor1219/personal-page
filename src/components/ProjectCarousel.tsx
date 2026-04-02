@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Paper } from "@mui/material";
-import { useCallback, useState, useEffect } from "react";
+import { useCallback, useState, useEffect, useRef } from "react";
 import ProjectInfoCard, { ProjectInfoCardProps } from "./ProjectInfoCard";
 import {
   Carousel,
@@ -16,12 +16,24 @@ import { cn } from "@/lib/utils";
 type ProjectCarouselProps = {
   items: ProjectInfoCardProps[];
   resetTrigger?: number;
+  onSlideIndexChange?: (index: number) => void;
 };
 
-const ProjectCarousel = ({ items, resetTrigger }: ProjectCarouselProps) => {
+const ProjectCarousel = ({
+  items,
+  resetTrigger,
+  onSlideIndexChange,
+}: ProjectCarouselProps) => {
   const [desktopApi, setDesktopApi] = useState<CarouselApi>();
   const [mobileApi, setMobileApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
+  const onSlideIndexChangeRef = useRef(onSlideIndexChange);
+  onSlideIndexChangeRef.current = onSlideIndexChange;
+
+  const notifySlideIndex = useCallback((api: CarouselApi | undefined) => {
+    if (!api) return;
+    onSlideIndexChangeRef.current?.(api.selectedScrollSnap());
+  }, []);
 
   // Track desktop API and update current state
   useEffect(() => {
@@ -30,10 +42,12 @@ const ProjectCarousel = ({ items, resetTrigger }: ProjectCarouselProps) => {
     }
 
     setCurrent(desktopApi.selectedScrollSnap() + 1);
+    notifySlideIndex(desktopApi);
 
     const onSelect = () => {
       if (desktopApi) {
         setCurrent(desktopApi.selectedScrollSnap() + 1);
+        notifySlideIndex(desktopApi);
       }
     };
 
@@ -42,7 +56,7 @@ const ProjectCarousel = ({ items, resetTrigger }: ProjectCarouselProps) => {
     return () => {
       desktopApi.off("select", onSelect);
     };
-  }, [desktopApi]);
+  }, [desktopApi, notifySlideIndex]);
 
   // Track mobile API and update current state
   useEffect(() => {
@@ -51,10 +65,12 @@ const ProjectCarousel = ({ items, resetTrigger }: ProjectCarouselProps) => {
     }
 
     setCurrent(mobileApi.selectedScrollSnap() + 1);
+    notifySlideIndex(mobileApi);
 
     const onSelect = () => {
       if (mobileApi) {
         setCurrent(mobileApi.selectedScrollSnap() + 1);
+        notifySlideIndex(mobileApi);
       }
     };
 
@@ -63,7 +79,7 @@ const ProjectCarousel = ({ items, resetTrigger }: ProjectCarouselProps) => {
     return () => {
       mobileApi.off("select", onSelect);
     };
-  }, [mobileApi]);
+  }, [mobileApi, notifySlideIndex]);
 
   useEffect(() => {
     // Reset both carousels when items change
@@ -74,7 +90,12 @@ const ProjectCarousel = ({ items, resetTrigger }: ProjectCarouselProps) => {
       mobileApi.scrollTo(0);
     }
     setCurrent(1);
-  }, [resetTrigger, desktopApi, mobileApi]);
+    if (desktopApi) {
+      notifySlideIndex(desktopApi);
+    } else if (mobileApi) {
+      notifySlideIndex(mobileApi);
+    }
+  }, [resetTrigger, desktopApi, mobileApi, notifySlideIndex]);
 
   const handleDotClick = useCallback(
     (index: number, isMobile: boolean = false) => {

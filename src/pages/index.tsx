@@ -1,20 +1,33 @@
 import { Box } from "@mui/material";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import ProjectCarousel from "@/components/ProjectCarousel";
 import PitchColumn from "@/components/PitchColumn";
 import FishingColumn from "@/components/FishingColumn";
 import FishCallout from "@/components/FishCallout";
+import { PenAccentProvider } from "@/contexts/PenAccentContext";
+import { PEN_ACCENT_MUI } from "@/lib/brandColors";
 import { PROJECTS, Category } from "@/data/projects";
 import blurData from "@/data/blurData";
 
 const Home = () => {
   const [category, setCategory] = useState<Category>(Category.GENERAL);
   const [resetCounter, setResetCounter] = useState(0);
+  const [carouselSlideIndex, setCarouselSlideIndex] = useState(0);
+
+  const penAccent = useMemo(() => {
+    const list =
+      category === Category.FISHING
+        ? PROJECTS[Category.FISHING]
+        : PROJECTS[Category.GENERAL];
+    const i = Math.min(Math.max(0, carouselSlideIndex), list.length - 1);
+    return list[i].penAccent ?? PEN_ACCENT_MUI;
+  }, [category, carouselSlideIndex]);
 
   const handleFishClick = () => {
     const newCategory = category === Category.GENERAL ? Category.FISHING : Category.GENERAL;
     setCategory(newCategory);
     setResetCounter(prev => prev + 1);
+    setCarouselSlideIndex(0);
   };
 
   const icons = [
@@ -23,6 +36,7 @@ const Home = () => {
   ] as const;
 
   return (
+    <PenAccentProvider value={penAccent}>
     <Box
       sx={{
         minHeight: "100dvh",
@@ -106,11 +120,16 @@ const Home = () => {
                   }}
                 >
                   <ProjectCarousel
-                    items={PROJECTS[cat].map(item => ({
-                      ...item,
-                      blurDataURL: blurData[item.imageSrc],
-                    }))}
+                    items={PROJECTS[cat].map(
+                      ({ penAccent: _pen, id: _id, ...item }) => ({
+                        ...item,
+                        blurDataURL: blurData[item.imageSrc],
+                      })
+                    )}
                     resetTrigger={cat === category ? resetCounter : undefined}
+                    onSlideIndexChange={
+                      cat === category ? setCarouselSlideIndex : undefined
+                    }
                   />
                 </div>
               ))}
@@ -120,6 +139,7 @@ const Home = () => {
       </Box>
       <FishCallout category={category} onFishClick={handleFishClick} icons={icons} />
     </Box>
+    </PenAccentProvider>
   );
 };
 

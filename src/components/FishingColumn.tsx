@@ -7,7 +7,6 @@ import {
   PenCircle,
   PenHighlight,
   PenUnderline,
-  penColors,
 } from "@/components/PenAnnotations";
 import { dAfterGreeting } from "@/lib/pitchTiming";
 import TypewriterGreeting from "@/components/TypewriterGreeting";
@@ -50,7 +49,7 @@ export default function FishingColumn() {
         }}
       >
         I&apos;m a{" "}
-        <PenCircle delay={dAfterGreeting(0)} color={penColors.circleViolet} multiline={false}>
+        <PenCircle delay={dAfterGreeting(0)} multiline={false}>
           fisherman
         </PenCircle>{" "}
         based out of Wasaga Beach, Ontario.
@@ -68,13 +67,13 @@ export default function FishingColumn() {
           }}
         >
           I&apos;ve been fishing for basically{" "}
-          <PenHighlight delay={dAfterGreeting(1)} color={penColors.highlightYellow} multiline={false}>
+          <PenHighlight delay={dAfterGreeting(1)} multiline={false}>
             all my life
           </PenHighlight>
           , and it&apos;s how I love to spend my free weekends. So far I&apos;ve caught lake
           trout, walleye, salmon, rainbow trout, and bass, a few of those trips are in the
           carousel here. I recently bought a small{" "}
-          <PenUnderline delay={dAfterGreeting(2)} color={penColors.underlinePink}>
+          <PenUnderline delay={dAfterGreeting(2)}>
             fishing boat
           </PenUnderline>
           , ask me about it!
@@ -91,11 +90,11 @@ export default function FishingColumn() {
           }}
         >
           This year I&apos;m hoping to land my first{" "}
-          <PenHighlight delay={dAfterGreeting(3)} color={penColors.highlightMarker}>
+          <PenHighlight delay={dAfterGreeting(3)}>
             brown trout
           </PenHighlight>{" "}
           and my first{" "}
-          <PenHighlight delay={dAfterGreeting(4)} color={penColors.highlightMint}>
+          <PenHighlight delay={dAfterGreeting(4)}>
             Atlantic trout
           </PenHighlight>
           . If you&apos;re ever looking for a fishing buddy, give me a holler.

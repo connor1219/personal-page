@@ -2,33 +2,19 @@
 
 import { useEffect, useRef } from "react";
 import { annotate } from "rough-notation";
-import { DEVPLY_PRIMARY_RGB } from "@/lib/brandColors";
+import { usePenAccent } from "@/contexts/PenAccentContext";
 import { ensureFontsReady } from "@/lib/fontReady";
 import { DRAW_MS } from "@/lib/pitchTiming";
 
 /** Default inset for circle annotations (top, right, bottom, left). */
 export const DEFAULT_CIRCLE_PADDING: [number, number, number, number] = [8, 14, 8, 14];
 
-/**
- * Devply green for all rough-notation (highlights, underlines, circles).
- * Keys unchanged for PitchColumn / FishingColumn.
- */
-const HIGHLIGHT = `rgba(${DEVPLY_PRIMARY_RGB}, 0.44)`;
-const STROKE = `rgba(${DEVPLY_PRIMARY_RGB}, 0.88)`;
-
-export const penColors = {
-  highlightYellow: HIGHLIGHT,
-  highlightMint: HIGHLIGHT,
-  highlightBlue: HIGHLIGHT,
-  underlinePink: STROKE,
-  underlineCoral: STROKE,
-  circleViolet: STROKE,
-  highlightMarker: HIGHLIGHT,
-};
+type RoughAnn = ReturnType<typeof annotate>;
 
 type PenBaseProps = {
   children: React.ReactNode;
   delay?: number;
+  /** When set, overrides `PenAccentProvider` for this annotation only. */
   color?: string;
   animationDuration?: number;
 };
@@ -65,23 +51,27 @@ async function readyToMeasure(el: HTMLElement | null): Promise<void> {
 export function PenHighlight({
   children,
   delay = 0,
-  color = penColors.highlightYellow,
+  color: colorProp,
   animationDuration = DRAW_MS,
   multiline = true,
 }: PenBaseProps & { multiline?: boolean }) {
+  const { highlight: ctxHighlight } = usePenAccent();
+  const color = colorProp ?? ctxHighlight;
   const ref = useRef<HTMLSpanElement>(null);
+  const annotationRef = useRef<RoughAnn | null>(null);
+  const colorRef = useRef(color);
+  colorRef.current = color;
 
   useEffect(() => {
     if (!ref.current) return;
     let cancelled = false;
-    let annotation: ReturnType<typeof annotate> | undefined;
     const timer = setTimeout(() => {
       void (async () => {
         await readyToMeasure(ref.current);
         if (cancelled || !ref.current) return;
-        annotation = annotate(ref.current!, {
+        const annotation = annotate(ref.current!, {
           type: "highlight",
-          color,
+          color: colorRef.current,
           multiline,
           iterations: 1,
           padding: [2, 4],
@@ -89,18 +79,27 @@ export function PenHighlight({
           animationDuration,
         });
         annotation.show();
+        annotationRef.current = annotation;
       })();
     }, delay);
     return () => {
       cancelled = true;
       clearTimeout(timer);
       try {
-        annotation?.remove();
+        annotationRef.current?.remove();
       } catch {
         // ignore
       }
+      annotationRef.current = null;
     };
-  }, [color, delay, animationDuration, multiline]);
+  }, [delay, animationDuration, multiline]);
+
+  useEffect(() => {
+    const ann = annotationRef.current;
+    if (ann?.isShowing()) {
+      ann.color = color;
+    }
+  }, [color]);
 
   return (
     <span ref={ref} className="inline align-baseline">
@@ -112,22 +111,26 @@ export function PenHighlight({
 export function PenUnderline({
   children,
   delay = 0,
-  color = penColors.underlinePink,
+  color: colorProp,
   animationDuration = DRAW_MS,
 }: PenBaseProps) {
+  const { stroke: ctxStroke } = usePenAccent();
+  const color = colorProp ?? ctxStroke;
   const ref = useRef<HTMLSpanElement>(null);
+  const annotationRef = useRef<RoughAnn | null>(null);
+  const colorRef = useRef(color);
+  colorRef.current = color;
 
   useEffect(() => {
     if (!ref.current) return;
     let cancelled = false;
-    let annotation: ReturnType<typeof annotate> | undefined;
     const timer = setTimeout(() => {
       void (async () => {
         await readyToMeasure(ref.current);
         if (cancelled || !ref.current) return;
-        annotation = annotate(ref.current!, {
+        const annotation = annotate(ref.current!, {
           type: "underline",
-          color,
+          color: colorRef.current,
           strokeWidth: 2.5,
           padding: 2,
           animate: true,
@@ -135,18 +138,27 @@ export function PenUnderline({
           multiline: true,
         });
         annotation.show();
+        annotationRef.current = annotation;
       })();
     }, delay);
     return () => {
       cancelled = true;
       clearTimeout(timer);
       try {
-        annotation?.remove();
+        annotationRef.current?.remove();
       } catch {
         // ignore
       }
+      annotationRef.current = null;
     };
-  }, [color, delay, animationDuration]);
+  }, [delay, animationDuration]);
+
+  useEffect(() => {
+    const ann = annotationRef.current;
+    if (ann?.isShowing()) {
+      ann.color = color;
+    }
+  }, [color]);
 
   return (
     <span ref={ref} className="inline align-baseline">
@@ -158,7 +170,7 @@ export function PenUnderline({
 export function PenCircle({
   children,
   delay = 0,
-  color = penColors.circleViolet,
+  color: colorProp,
   animationDuration = DRAW_MS,
   multiline = true,
   padding = DEFAULT_CIRCLE_PADDING,
@@ -168,19 +180,23 @@ export function PenCircle({
   padding?: number | [number, number] | [number, number, number, number];
   preWrap?: boolean;
 }) {
+  const { stroke: ctxStroke } = usePenAccent();
+  const color = colorProp ?? ctxStroke;
   const ref = useRef<HTMLSpanElement>(null);
+  const annotationRef = useRef<RoughAnn | null>(null);
+  const colorRef = useRef(color);
+  colorRef.current = color;
 
   useEffect(() => {
     if (!ref.current) return;
     let cancelled = false;
-    let annotation: ReturnType<typeof annotate> | undefined;
     const timer = setTimeout(() => {
       void (async () => {
         await readyToMeasure(ref.current);
         if (cancelled || !ref.current) return;
-        annotation = annotate(ref.current!, {
+        const annotation = annotate(ref.current!, {
           type: "circle",
-          color,
+          color: colorRef.current,
           multiline,
           strokeWidth: 2,
           padding,
@@ -188,18 +204,27 @@ export function PenCircle({
           animationDuration,
         });
         annotation.show();
+        annotationRef.current = annotation;
       })();
     }, delay);
     return () => {
       cancelled = true;
       clearTimeout(timer);
       try {
-        annotation?.remove();
+        annotationRef.current?.remove();
       } catch {
         // ignore
       }
+      annotationRef.current = null;
     };
-  }, [color, delay, animationDuration, multiline, padding, preWrap]);
+  }, [delay, animationDuration, multiline, padding, preWrap]);
+
+  useEffect(() => {
+    const ann = annotationRef.current;
+    if (ann?.isShowing()) {
+      ann.color = color;
+    }
+  }, [color]);
 
   return (
     <span

@@ -9,7 +9,6 @@ import {
   PenCircle,
   PenHighlight,
   PenUnderline,
-  penColors as colors,
 } from "@/components/PenAnnotations";
 
 const patrickHand = Patrick_Hand({
@@ -49,7 +48,7 @@ export default function PitchColumn() {
         }}
       >
         I&apos;m based in{" "}
-        <PenUnderline delay={dAfterGreeting(0)} color={colors.underlinePink}>
+        <PenUnderline delay={dAfterGreeting(0)}>
           Toronto, Canada
         </PenUnderline>
         .
@@ -65,11 +64,11 @@ export default function PitchColumn() {
         }}
       >
         I&apos;m a{" "}
-        <PenHighlight delay={dAfterGreeting(1)} color={colors.highlightYellow}>
+        <PenHighlight delay={dAfterGreeting(1)}>
           full stack developer
         </PenHighlight>{" "}
         and the{" "}
-        <PenUnderline delay={dAfterGreeting(2)} color={colors.underlineCoral}>
+        <PenUnderline delay={dAfterGreeting(2)}>
           sole engineer
         </PenUnderline>{" "}
         behind real products in production. At my core, I take messy, ambiguous
@@ -86,11 +85,11 @@ export default function PitchColumn() {
         }}
       >
         I&apos;ve{" "}
-        <PenCircle delay={dAfterGreeting(3)} color={colors.circleViolet}>
+        <PenCircle delay={dAfterGreeting(3)}>
           built and operated
         </PenCircle>{" "}
         a software driven resale business generating{" "}
-        <PenUnderline delay={dAfterGreeting(4)} color={colors.underlinePink}>
+        <PenUnderline delay={dAfterGreeting(4)}>
           over $450,000
         </PenUnderline>{" "}
         in revenue, using automation and web scraping to identify and act on
@@ -107,17 +106,17 @@ export default function PitchColumn() {
         }}
       >
         Currently, I{" "}
-        <PenHighlight delay={dAfterGreeting(5)} color={colors.highlightMint} multiline={false}>
+        <PenHighlight delay={dAfterGreeting(5)} multiline={false}>
           lead all development
         </PenHighlight>{" "}
         at Value Connect, owning everything across the frontend, backend, and
         infrastructure. I&apos;ve shipped high impact features, optimized core
         workflows, and refactored systems to improve full page load times by{" "}
-        <PenUnderline delay={dAfterGreeting(6)} color={colors.underlinePink}>
+        <PenUnderline delay={dAfterGreeting(6)}>
           78%
         </PenUnderline>
         , all while{" "}
-        <PenHighlight delay={dAfterGreeting(7)} color={colors.highlightMarker} multiline>
+        <PenHighlight delay={dAfterGreeting(7)} multiline>
           working directly with stakeholders
         </PenHighlight>{" "}
         to solve real business problems.
@@ -133,11 +132,11 @@ export default function PitchColumn() {
         }}
       >
         If you want someone who can take ownership{" "}
-        <PenHighlight delay={dAfterGreeting(8)} color={colors.highlightBlue} multiline={false}>
+        <PenHighlight delay={dAfterGreeting(8)} multiline={false}>
           end to end
         </PenHighlight>{" "}
         and actually deliver,{" "}
-        <PenUnderline delay={dAfterGreeting(9)} color={colors.underlinePink}>
+        <PenUnderline delay={dAfterGreeting(9)}>
           let&apos;s talk
         </PenUnderline>.
       </Typography>

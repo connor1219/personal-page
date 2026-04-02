@@ -4,7 +4,7 @@ import { Box, IconButton } from "@mui/material";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { annotate } from "rough-notation";
-import { DEVPLY_ACCENT } from "@/lib/brandColors";
+import { usePenAccent } from "@/contexts/PenAccentContext";
 import { DRAW_MS, FISH_CALLOUT_DELAY_MS } from "@/lib/pitchTiming";
 import { Category } from "@/data/projects";
 
@@ -21,34 +21,46 @@ type FishCalloutProps = {
 };
 
 export default function FishCallout({ category, onFishClick, icons }: FishCalloutProps) {
+  const { stroke } = usePenAccent();
   const fishWrapRef = useRef<HTMLDivElement>(null);
+  const annotationRef = useRef<ReturnType<typeof annotate> | null>(null);
+  const strokeRef = useRef(stroke);
+  strokeRef.current = stroke;
   const [showHint, setShowHint] = useState(false);
 
   useEffect(() => {
-    let annotation: ReturnType<typeof annotate> | undefined;
     const timer = setTimeout(() => {
       setShowHint(true);
       if (!fishWrapRef.current) return;
-      annotation = annotate(fishWrapRef.current, {
+      const annotation = annotate(fishWrapRef.current, {
         type: "circle",
-        color: DEVPLY_ACCENT,
+        color: strokeRef.current,
         strokeWidth: 2.5,
         padding: 10,
         animate: true,
         animationDuration: DRAW_MS,
       });
       annotation.show();
+      annotationRef.current = annotation;
     }, FISH_CALLOUT_DELAY_MS);
 
     return () => {
       clearTimeout(timer);
       try {
-        annotation?.remove();
+        annotationRef.current?.remove();
       } catch {
         // ignore
       }
+      annotationRef.current = null;
     };
   }, []);
+
+  useEffect(() => {
+    const ann = annotationRef.current;
+    if (ann?.isShowing()) {
+      ann.color = stroke;
+    }
+  }, [stroke]);
 
   return (
     <Box
@@ -89,7 +101,7 @@ export default function FishCallout({ category, onFishClick, icons }: FishCallou
           viewBox="0 0 201 126"
           fill="none"
           sx={{
-            color: DEVPLY_ACCENT,
+            color: stroke,
             flexShrink: 0,
             width: { xs: 85, sm: 105 },
             height: "auto",
