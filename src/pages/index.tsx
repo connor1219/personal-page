@@ -120,12 +120,15 @@ const Home = () => {
                   }}
                 >
                   <ProjectCarousel
-                    items={PROJECTS[cat].map(
-                      ({ penAccent: _pen, id: _id, ...item }) => ({
-                        ...item,
-                        blurDataURL: blurData[item.imageSrc],
-                      })
-                    )}
+                    items={PROJECTS[cat].map((item) => {
+                      const { id: _omitId, penAccent: _omitAccent, ...card } = item;
+                      void _omitId;
+                      void _omitAccent;
+                      return {
+                        ...card,
+                        blurDataURL: blurData[card.imageSrc],
+                      };
+                    })}
                     resetTrigger={cat === category ? resetCounter : undefined}
                     onSlideIndexChange={
                       cat === category ? setCarouselSlideIndex : undefined
