@@ -99,9 +99,11 @@ export default function TypewriterGreeting({
       role="status"
       aria-label={GREETING_TEXT}
       sx={{
-        minHeight: { xs: "2.75rem", sm: "3.25rem" },
+        height: { xs: "3.5rem", sm: "4.25rem" },
+        flexShrink: 0,
         width: "100%",
         "& svg": { overflow: "visible" },
+        "& svg:not([height])": { height: 0 },
         ...sx,
       }}
     />
