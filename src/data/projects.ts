@@ -111,12 +111,20 @@ export const PROJECTS: Record<Category, ProjectItem[]> = {
       penAccent: PEN_ACCENT_FISH_RAINBOW,
     },
     {
+        id: "Pike",
+        imageSrc: "/icon/pike.jpeg",
+        title: "Thunder Bay Pike",
+      body: "My first time fishing in Thunder Bay and I landed my biggest pike yet, it's well worth the long drive.",
+      lures: ["Leeches, Worms, Swimbaits"],
+      penAccent: PEN_ACCENT_FISH_CHARTREUSE,
+    },
+    {
       id: "bass",
       imageSrc: "/icon/bass-catch.webp",
       title: "Good ol' Bass Fishing",
       body: "Bass will try and eat just about anything and they're super strong fighters once they're hooked. It's an awesome combo.",
       lures: ["Rapalas", "Swimbaits", "Crankbaits"],
       penAccent: PEN_ACCENT_FISH_CHARTREUSE,
-    },
+    }
   ],
 };
