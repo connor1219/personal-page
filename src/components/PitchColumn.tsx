@@ -3,7 +3,6 @@
 import { Box, Link, Typography } from "@mui/material";
 import { Patrick_Hand } from "next/font/google";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
-import { dAfterGreeting } from "@/lib/pitchTiming";
 import TypewriterGreeting from "@/components/TypewriterGreeting";
 import {
   PenCircle,
@@ -48,7 +47,7 @@ export default function PitchColumn() {
         }}
       >
         I&apos;m based in{" "}
-        <PenUnderline delay={dAfterGreeting(0)}>
+        <PenUnderline>
           Toronto, Canada
         </PenUnderline>
         .
@@ -64,15 +63,15 @@ export default function PitchColumn() {
         }}
       >
         I&apos;m a{" "}
-        <PenHighlight delay={dAfterGreeting(1)}>
+        <PenHighlight>
           full stack developer
         </PenHighlight>{" "}
         and currently the{" "}
-        <PenUnderline delay={dAfterGreeting(2)}>
+        <PenUnderline>
           sole engineer
         </PenUnderline>{" "}
-        behind real products in production at Value Connect. At my core, I take messy, ambiguous
-        problems and turn them into systems that actually work, ship, and scale.
+        at Value Connect, a real estate appraisal software startup. Every day I take messy, ambiguous
+        problems and turn them into systems that actually work, ship fast, and scale.
       </Typography>
 
       <Typography
@@ -84,18 +83,43 @@ export default function PitchColumn() {
           m: 0,
         }}
       >
-        I&apos;ve{" "}
-        <PenCircle delay={dAfterGreeting(3)}>
+        Before Value Connect, I{" "}
+        <PenCircle>
           built and operated
         </PenCircle>{" "}
         a software driven resale business generating{" "}
-        <PenUnderline delay={dAfterGreeting(4)}>
+        <PenUnderline>
           over $450,000
         </PenUnderline>{" "}
         in revenue, using automation and web scraping to identify and act on
         real market opportunities.
       </Typography>
 
+      {/* <Typography
+        variant="body1"
+        sx={{
+          fontSize: { xs: "1.05rem", sm: "1.15rem" },
+          lineHeight: 1.65,
+          color: "text.secondary",
+          m: 0,
+        }}
+      >
+        Recently, I{" "}
+        <PenHighlight>
+          Co-Founded a B2B SaaS
+        </PenHighlight>{" "}
+        called Orbit, a compliance and automation first CRM for merchant cash
+        advance lenders. I spent months learning the industry deeply enough to
+        build something genuinely better than what exists today. Orbit runs a
+        lender&apos;s entire deal flow, from broker submission through
+        underwriting, contracts, and funding, turning messy inbound submissions
+        into clean, actionable pipeline, and it&apos;s already at{" "}
+        <PenUnderline>
+          $24,000 ARR
+        </PenUnderline>
+        .
+      </Typography> */}
+
       <Typography
         variant="body1"
         sx={{
@@ -105,18 +129,18 @@ export default function PitchColumn() {
           m: 0,
         }}
       >
-        Currently, I{" "}
-        <PenHighlight delay={dAfterGreeting(5)} multiline={false}>
+        At Value Connect, I{" "}
+        <PenHighlight multiline={false}>
           lead all development
-        </PenHighlight>{" "}
-        at Value Connect, owning everything across the frontend, backend, and
-        infrastructure. I&apos;ve shipped high impact features, optimized core
-        workflows, and implemented AI agents to automate repetitive tasks saving our team of 4{" "}
-        <PenUnderline delay={dAfterGreeting(6)}>
+        </PenHighlight>
+        , owning everything across the frontend, backend, and
+        infrastructure. I&apos;ve shipped countless high impact features,
+        and <PenHighlight>implemented autonomous AI agents</PenHighlight> to automate repetitive tasks saving our team of 4{" "}
+        <PenUnderline>
           over 20 hours per week
         </PenUnderline>
         , all while{" "}
-        <PenHighlight delay={dAfterGreeting(7)} multiline>
+        <PenHighlight multiline>
           working directly with stakeholders
         </PenHighlight>{" "}
         to solve real business problems.
@@ -131,12 +155,28 @@ export default function PitchColumn() {
           m: 0,
         }}
       >
+        I have experience working with{" "}
+        <PenHighlight multiline>
+          TypeScript, React, Java, Python, AWS, mySQL, Postgres, Terraform (IAC), React Native, and much more
+        </PenHighlight>
+        .
+      </Typography>
+
+      <Typography
+        variant="body1"
+        sx={{
+          fontSize: { xs: "1.05rem", sm: "1.15rem" },
+          lineHeight: 1.65,
+          color: "text.secondary",
+          m: 0,
+        }}
+      >
         If you want someone who can take ownership{" "}
-        <PenHighlight delay={dAfterGreeting(8)} multiline={false}>
+        <PenHighlight multiline={false}>
           end to end
         </PenHighlight>{" "}
         and actually deliver,{" "}
-        <PenUnderline delay={dAfterGreeting(9)}>
+        <PenUnderline>
           let&apos;s talk
         </PenUnderline>.
       </Typography>

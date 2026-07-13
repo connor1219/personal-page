@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { annotate } from "rough-notation";
 import { usePenAccent } from "@/contexts/PenAccentContext";
-import { DRAW_MS, FISH_CALLOUT_DELAY_MS } from "@/lib/pitchTiming";
+import { DRAW_MS } from "@/lib/pitchTiming";
 import { Category } from "@/data/projects";
 
 type IconConfig = {
@@ -18,17 +18,29 @@ type FishCalloutProps = {
   category: Category;
   onFishClick: () => void;
   icons: readonly IconConfig[];
+  /** When to draw the attention circle, or `null` until the timing is known. */
+  calloutDelayMs: number | null;
 };
 
-export default function FishCallout({ category, onFishClick, icons }: FishCalloutProps) {
+export default function FishCallout({
+  category,
+  onFishClick,
+  icons,
+  calloutDelayMs,
+}: FishCalloutProps) {
   const { stroke } = usePenAccent();
   const fishWrapRef = useRef<HTMLDivElement>(null);
   const annotationRef = useRef<ReturnType<typeof annotate> | null>(null);
   const strokeRef = useRef(stroke);
   strokeRef.current = stroke;
   const [showHint, setShowHint] = useState(false);
+  // Fire exactly once, the first time a real delay is available.
+  const scheduledRef = useRef(false);
 
   useEffect(() => {
+    if (calloutDelayMs == null || scheduledRef.current) return;
+    scheduledRef.current = true;
+
     const timer = setTimeout(() => {
       setShowHint(true);
       if (!fishWrapRef.current) return;
@@ -42,7 +54,7 @@ export default function FishCallout({ category, onFishClick, icons }: FishCallou
       });
       annotation.show();
       annotationRef.current = annotation;
-    }, FISH_CALLOUT_DELAY_MS);
+    }, calloutDelayMs);
 
     return () => {
       clearTimeout(timer);
@@ -53,7 +65,7 @@ export default function FishCallout({ category, onFishClick, icons }: FishCallou
       }
       annotationRef.current = null;
     };
-  }, []);
+  }, [calloutDelayMs]);
 
   useEffect(() => {
     const ann = annotationRef.current;

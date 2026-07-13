@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { annotate } from "rough-notation";
 import { usePenAccent } from "@/contexts/PenAccentContext";
+import { usePenSequenceDelay } from "@/contexts/PenSequenceContext";
 import { ensureFontsReady } from "@/lib/fontReady";
 import { DRAW_MS } from "@/lib/pitchTiming";
 
@@ -13,6 +14,10 @@ type RoughAnn = ReturnType<typeof annotate>;
 
 type PenBaseProps = {
   children: React.ReactNode;
+  /**
+   * Explicit start delay (ms). Usually omitted — inside a `PenSequenceProvider`
+   * the delay auto-sequences from source order. Set this only to override.
+   */
   delay?: number;
   /** When set, overrides `PenAccentProvider` for this annotation only. */
   color?: string;
@@ -50,13 +55,15 @@ async function readyToMeasure(el: HTMLElement | null): Promise<void> {
 
 export function PenHighlight({
   children,
-  delay = 0,
+  delay: delayProp,
   color: colorProp,
   animationDuration = DRAW_MS,
   multiline = true,
 }: PenBaseProps & { multiline?: boolean }) {
   const { highlight: ctxHighlight } = usePenAccent();
   const color = colorProp ?? ctxHighlight;
+  const autoDelay = usePenSequenceDelay();
+  const delay = delayProp ?? autoDelay ?? 0;
   const ref = useRef<HTMLSpanElement>(null);
   const annotationRef = useRef<RoughAnn | null>(null);
   const colorRef = useRef(color);
@@ -110,12 +117,14 @@ export function PenHighlight({
 
 export function PenUnderline({
   children,
-  delay = 0,
+  delay: delayProp,
   color: colorProp,
   animationDuration = DRAW_MS,
 }: PenBaseProps) {
   const { stroke: ctxStroke } = usePenAccent();
   const color = colorProp ?? ctxStroke;
+  const autoDelay = usePenSequenceDelay();
+  const delay = delayProp ?? autoDelay ?? 0;
   const ref = useRef<HTMLSpanElement>(null);
   const annotationRef = useRef<RoughAnn | null>(null);
   const colorRef = useRef(color);
@@ -169,7 +178,7 @@ export function PenUnderline({
 
 export function PenCircle({
   children,
-  delay = 0,
+  delay: delayProp,
   color: colorProp,
   animationDuration = DRAW_MS,
   multiline = true,
@@ -182,6 +191,8 @@ export function PenCircle({
 }) {
   const { stroke: ctxStroke } = usePenAccent();
   const color = colorProp ?? ctxStroke;
+  const autoDelay = usePenSequenceDelay();
+  const delay = delayProp ?? autoDelay ?? 0;
   const ref = useRef<HTMLSpanElement>(null);
   const annotationRef = useRef<RoughAnn | null>(null);
   const colorRef = useRef(color);

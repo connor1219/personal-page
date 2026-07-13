@@ -5,7 +5,9 @@ import PitchColumn from "@/components/PitchColumn";
 import FishingColumn from "@/components/FishingColumn";
 import FishCallout from "@/components/FishCallout";
 import { PenAccentProvider } from "@/contexts/PenAccentContext";
+import { PenSequenceProvider } from "@/contexts/PenSequenceContext";
 import { PEN_ACCENT_MUI } from "@/lib/brandColors";
+import { dAfterGreeting } from "@/lib/pitchTiming";
 import { PROJECTS, Category } from "@/data/projects";
 import blurData from "@/data/blurData";
 
@@ -13,6 +15,13 @@ const Home = () => {
   const [category, setCategory] = useState<Category>(Category.GENERAL);
   const [resetCounter, setResetCounter] = useState(0);
   const [carouselSlideIndex, setCarouselSlideIndex] = useState(0);
+  const [pitchAnnotationCount, setPitchAnnotationCount] = useState(0);
+
+  // The fish callout circles the toggle icon a beat after the pitch column's
+  // last annotation finishes. Derived from the live annotation count so it
+  // never needs hand-tuning when the copy changes.
+  const fishCalloutDelayMs =
+    pitchAnnotationCount > 0 ? dAfterGreeting(pitchAnnotationCount) + 400 : null;
 
   const penAccent = useMemo(() => {
     const list =
@@ -90,7 +99,20 @@ const Home = () => {
                 width: "100%",
               }}
             >
-              {category === Category.GENERAL ? <PitchColumn /> : <FishingColumn />}
+              <PenSequenceProvider
+                key={category}
+                onSettle={
+                  category === Category.GENERAL
+                    ? setPitchAnnotationCount
+                    : undefined
+                }
+              >
+                {category === Category.GENERAL ? (
+                  <PitchColumn />
+                ) : (
+                  <FishingColumn />
+                )}
+              </PenSequenceProvider>
             </Box>
           </Box>
 
@@ -140,7 +162,12 @@ const Home = () => {
           </Box>
         </Box>
       </Box>
-      <FishCallout category={category} onFishClick={handleFishClick} icons={icons} />
+      <FishCallout
+        category={category}
+        onFishClick={handleFishClick}
+        icons={icons}
+        calloutDelayMs={fishCalloutDelayMs}
+      />
     </Box>
     </PenAccentProvider>
   );

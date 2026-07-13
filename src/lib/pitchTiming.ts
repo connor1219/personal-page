@@ -13,17 +13,11 @@ export const GREETING_PAD_MS = 280;
 export const GREETING_ANIMATION_TOTAL_MS =
   VARA_GREETING_DURATION_MS + GREETING_PAD_MS;
 
-/** Stagger offset for pen annotations (after greeting animation finishes). */
+/**
+ * Stagger offset for pen annotation slot `n` (after the greeting finishes).
+ * Slots are assigned automatically in source order by `PenSequenceProvider`;
+ * see `@/contexts/PenSequenceContext`.
+ */
 export function dAfterGreeting(n: number): number {
   return GREETING_ANIMATION_TOTAL_MS + n * step;
 }
-
-/** Index of the last pitch keyword annotation ("let's talk"). */
-export const LAST_PITCH_ANNOTATION_INDEX = 9;
-
-/** When to start the fish callout: after greeting + last pitch stroke + short beat. */
-export const FISH_CALLOUT_DELAY_MS =
-  GREETING_ANIMATION_TOTAL_MS +
-  LAST_PITCH_ANNOTATION_INDEX * step +
-  DRAW_MS +
-  400;

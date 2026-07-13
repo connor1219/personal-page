@@ -115,7 +115,7 @@ export const PROJECTS: Record<Category, ProjectItem[]> = {
         imageSrc: "/icon/pike.jpeg",
         title: "Thunder Bay Pike",
       body: "My first time fishing in Thunder Bay and I landed my biggest pike yet, it's well worth the long drive.",
-      lures: ["Leeches, Worms, Swimbaits"],
+      lures: ["Leeches", "Worms", "Swimbaits", "Crankbaits"],
       penAccent: PEN_ACCENT_FISH_CHARTREUSE,
     },
     {
