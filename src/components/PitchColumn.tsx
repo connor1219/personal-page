@@ -67,11 +67,11 @@ export default function PitchColumn() {
         <PenHighlight delay={dAfterGreeting(1)}>
           full stack developer
         </PenHighlight>{" "}
-        and the{" "}
+        and currently the{" "}
         <PenUnderline delay={dAfterGreeting(2)}>
           sole engineer
         </PenUnderline>{" "}
-        behind real products in production. At my core, I take messy, ambiguous
+        behind real products in production at Value Connect. At my core, I take messy, ambiguous
         problems and turn them into systems that actually work, ship, and scale.
       </Typography>
 
@@ -111,9 +111,9 @@ export default function PitchColumn() {
         </PenHighlight>{" "}
         at Value Connect, owning everything across the frontend, backend, and
         infrastructure. I&apos;ve shipped high impact features, optimized core
-        workflows, and refactored systems to improve full page load times by{" "}
+        workflows, and implemented AI agents to automate repetitive tasks saving our team of 4{" "}
         <PenUnderline delay={dAfterGreeting(6)}>
-          78%
+          over 20 hours per week
         </PenUnderline>
         , all while{" "}
         <PenHighlight delay={dAfterGreeting(7)} multiline>
